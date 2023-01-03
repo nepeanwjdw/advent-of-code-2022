@@ -71,7 +71,7 @@ def main_two(closest_beacons: str, most_coords: int):
     for row in range(0, most_coords + 1):
         print(row)
         no_beacons_count, hidden_beacon = process_row(
-            links=parsed_input, row=row, max_coord=20
+            links=parsed_input, row=row, max_coord=most_coords
         )
         if hidden_beacon:
             print(f"hidden beacon at ({hidden_beacon},{row})")
