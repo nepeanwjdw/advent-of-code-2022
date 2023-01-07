@@ -1,5 +1,4 @@
 import re
-from collections import Counter
 from typing import Optional
 
 from example_inputs.day_15 import example_input
@@ -51,7 +50,7 @@ class SensorBeacon:
         return False
 
 
-def build_boundaries(links: list[SensorBeacon], max_coord: int):
+def build_boundaries(links: list[SensorBeacon], max_coord: int) -> set:
     border_coords = {}
     current_x = None
     current_y = None
@@ -102,14 +101,9 @@ def build_boundaries(links: list[SensorBeacon], max_coord: int):
                 else:
                     border_coords[f"({current_x},{current_y})"] = 1
 
-    row_counts = Counter(
-        list(re.findall(r"-?\d+", k)[1] for k, v in border_coords.items() if v > 3)
+    return set(
+        int(re.findall(r"-?\d+", k)[1]) for k, v in border_coords.items() if v > 3
     )
-
-    return [
-        int(k)
-        for k, v in sorted(row_counts.items(), key=lambda item: item[1], reverse=True)
-    ]
 
 
 def parse_input(input: str) -> list[SensorBeacon]:
